@@ -11,7 +11,7 @@ namespace Transvoxel.SurfaceExtractor
         {
             Verts = new int[size];
 
-            for (int i = 0; i < size; i++)
+            for (var i = 0; i < size; i++)
                 Verts[i] = -1;
         }
     }
@@ -28,7 +28,7 @@ namespace Transvoxel.SurfaceExtractor
             _cache[0] = new ReuseCell[chunkSize * chunkSize];
             _cache[1] = new ReuseCell[chunkSize * chunkSize];
 
-            for (int i = 0; i < chunkSize * chunkSize; i++)
+            for (var i = 0; i < chunkSize * chunkSize; i++)
             {
                 _cache[0][i] = new ReuseCell(4);
                 _cache[1][i] = new ReuseCell(4);
@@ -37,13 +37,13 @@ namespace Transvoxel.SurfaceExtractor
 
         public ReuseCell GetReusedIndex(Vector3i pos, byte rDir)
         {
-            int rx = rDir & 0x01;
-            int rz = (rDir >> 1) & 0x01;
-            int ry = (rDir >> 2) & 0x01;
+            var rx = rDir & 0x01;
+            var rz = (rDir >> 1) & 0x01;
+            var ry = (rDir >> 2) & 0x01;
 
-            int dx = pos.X - rx;
-            int dy = pos.Y - ry;
-            int dz = pos.Z - rz;
+            var dx = pos.X - rx;
+            var dy = pos.Y - ry;
+            var dz = pos.Z - rz;
 
             Debug.Assert(dx >= 0 && dy >= 0 && dz >= 0);
             return _cache[dx & 1][dy * chunkSize + dz];
@@ -80,7 +80,7 @@ namespace Transvoxel.SurfaceExtractor
             const int cacheSize = 0;// 2 * TransvoxelExtractor.BlockWidth * TransvoxelExtractor.BlockWidth;
             _cache = new ReuseCell[cacheSize];
 
-            for (int i = 0; i < cacheSize; i++)
+            for (var i = 0; i < cacheSize; i++)
             {
                 _cache[i] = new ReuseCell(12);
             }

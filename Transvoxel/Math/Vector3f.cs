@@ -153,7 +153,7 @@ namespace Transvoxel.Math
                 return v;
 
 
-            float inverse = 1 / v.Magnitude;
+            var inverse = 1 / v.Magnitude;
             return new Vector3f(
                 v.X * inverse,
                 v.Y * inverse,
@@ -332,7 +332,7 @@ namespace Transvoxel.Math
         {
             unchecked
             {
-                int result = (int)Y;
+                var result = (int)Y;
                 result = (result * 397) ^ (int)Z;
                 result = (result * 397) ^ (int)X;
                 return result;

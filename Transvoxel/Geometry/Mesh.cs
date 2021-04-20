@@ -69,9 +69,9 @@ namespace Transvoxel.Geometry
 
         public float[] GetVerticesFloatArray()
         {
-            float[] arr = new float[vertices.Count * 3];
-            int i = 0;
-            foreach (Vector3f v in vertices)
+            var arr = new float[vertices.Count * 3];
+            var i = 0;
+            foreach (var v in vertices)
             {
                 arr[i + 0] = v.X;
                 arr[i + 1] = v.Y;

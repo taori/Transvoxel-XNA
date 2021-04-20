@@ -44,30 +44,30 @@ namespace Transvoxel.Math
                 lattice points, dots them with the input vector, and interpolates the
                 results to produce a single output value in [0, 1] range. */
 
-            int ix = (int)System.Math.Floor(x);
-            double fx0 = x - ix;
-            double fx1 = fx0 - 1;
-            double wx = Smooth(fx0);
+            var ix = (int)System.Math.Floor(x);
+            var fx0 = x - ix;
+            var fx1 = fx0 - 1;
+            var wx = Smooth(fx0);
 
-            int iy = (int)System.Math.Floor(y);
-            double fy0 = y - iy;
-            double fy1 = fy0 - 1;
-            double wy = Smooth(fy0);
+            var iy = (int)System.Math.Floor(y);
+            var fy0 = y - iy;
+            var fy1 = fy0 - 1;
+            var wy = Smooth(fy0);
 
-            int iz = (int)System.Math.Floor(z);
-            double fz0 = z - iz;
-            double fz1 = fz0 - 1;
-            double wz = Smooth(fz0);
+            var iz = (int)System.Math.Floor(z);
+            var fz0 = z - iz;
+            var fz1 = fz0 - 1;
+            var wz = Smooth(fz0);
 
-            double vx0 = Lattice(ix, iy, iz, fx0, fy0, fz0);
-            double vx1 = Lattice(ix + 1, iy, iz, fx1, fy0, fz0);
-            double vy0 = Lerp(wx, vx0, vx1);
+            var vx0 = Lattice(ix, iy, iz, fx0, fy0, fz0);
+            var vx1 = Lattice(ix + 1, iy, iz, fx1, fy0, fz0);
+            var vy0 = Lerp(wx, vx0, vx1);
 
             vx0 = Lattice(ix, iy + 1, iz, fx0, fy1, fz0);
             vx1 = Lattice(ix + 1, iy + 1, iz, fx1, fy1, fz0);
-            double vy1 = Lerp(wx, vx0, vx1);
+            var vy1 = Lerp(wx, vx0, vx1);
 
-            double vz0 = Lerp(wy, vy0, vy1);
+            var vz0 = Lerp(wy, vy0, vy1);
 
             vx0 = Lattice(ix, iy, iz + 1, fx0, fy0, fz1);
             vx1 = Lattice(ix + 1, iy, iz + 1, fx1, fy0, fz1);
@@ -77,17 +77,17 @@ namespace Transvoxel.Math
             vx1 = Lattice(ix + 1, iy + 1, iz + 1, fx1, fy1, fz1);
             vy1 = Lerp(wx, vx0, vx1);
 
-            double vz1 = Lerp(wy, vy0, vy1);
+            var vz1 = Lerp(wy, vy0, vy1);
             return Lerp(wz, vz0, vz1);
         }
 
         private void InitGradients()
         {
-            for (int i = 0; i < GradientSizeTable; i++)
+            for (var i = 0; i < GradientSizeTable; i++)
             {
-                double z = 1f - 2f * _random.NextDouble();
-                double r = System.Math.Sqrt(1f - z * z);
-                double theta = 2 * System.Math.PI * _random.NextDouble();
+                var z = 1f - 2f * _random.NextDouble();
+                var r = System.Math.Sqrt(1f - z * z);
+                var theta = 2 * System.Math.PI * _random.NextDouble();
                 _gradients[i * 3] = r * System.Math.Cos(theta);
                 _gradients[i * 3 + 1] = r * System.Math.Sin(theta);
                 _gradients[i * 3 + 2] = z;
@@ -109,8 +109,8 @@ namespace Transvoxel.Math
         private double Lattice(int ix, int iy, int iz, double fx, double fy, double fz)
         {
             // Look up a random gradient at [ix,iy,iz] and dot it with the [fx,fy,fz] vector.
-            int index = Index(ix, iy, iz);
-            int g = index * 3;
+            var index = Index(ix, iy, iz);
+            var g = index * 3;
             return _gradients[g] * fx + _gradients[g + 1] * fy + _gradients[g + 2] * fz;
         }
 

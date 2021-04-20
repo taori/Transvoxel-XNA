@@ -178,7 +178,7 @@ namespace Transvoxel.Math
         {
             unchecked
             {
-                int result = Y;
+                var result = Y;
                 result = (result * 397) ^ Z;
                 result = (result * 397) ^ X;
                 return result;

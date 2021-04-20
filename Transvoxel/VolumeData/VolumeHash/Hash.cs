@@ -24,13 +24,13 @@ namespace Transvoxel.VolumeData.VolumeHash
 
         private Vector3i GetChunkIndex(int x, int y, int z)
         {
-            int xI = x / Size.SideLength;
+            var xI = x / Size.SideLength;
             if (x < 0) xI--;
 
-            int yI = y / Size.SideLength;
+            var yI = y / Size.SideLength;
             if (y < 0) yI--;
 
-            int zI = z / Size.SideLength;
+            var zI = z / Size.SideLength;
             if (z < 0) zI--;
 
             return new Vector3i(xI, yI, zI);
@@ -46,7 +46,7 @@ namespace Transvoxel.VolumeData.VolumeHash
                 if (!_data.ContainsKey(chunkIndex))
                     return default(T);
 
-                int offsetIndex = (x - chunkIndex.X * Size.SideLength) +
+                var offsetIndex = (x - chunkIndex.X * Size.SideLength) +
                                   (y - chunkIndex.Y * Size.SideLength) * Size.SideLength +
                                   (z - chunkIndex.Z * Size.SideLength) * Size.SideLengthSquared;
 
@@ -56,7 +56,7 @@ namespace Transvoxel.VolumeData.VolumeHash
             {
                 var chunkIndex = GetChunkIndex(x, y, z);
 
-                int offsetIndex = (x - chunkIndex.X * Size.SideLength) +
+                var offsetIndex = (x - chunkIndex.X * Size.SideLength) +
                                   (y - chunkIndex.Y * Size.SideLength) * Size.SideLength +
                                   (z - chunkIndex.Z * Size.SideLength) * Size.SideLengthSquared;
 
