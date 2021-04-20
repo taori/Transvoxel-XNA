@@ -74,7 +74,7 @@ namespace TransvoxelXnaStudio.TransvoxelHelpers
 
                         //Logger.GetLogger().Log(null, "" + dst);
 
-                        var m = _surfaceExtractor.GenLodRegion(position, 8, lod);
+                        var m = _surfaceExtractor.ExtractMesh(position, TODO);
                         //var m = _surfaceExtractor.GenLodCell(n);
                         var v = Converters.ConvertMeshToXna(m, LodColors[lod % LodColors.Length]);
                         var i = m.GetIndices();
