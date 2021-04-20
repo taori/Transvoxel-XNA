@@ -10,28 +10,26 @@ namespace Transvoxel.SurfaceExtractor
     {
         public bool UseCache { get; set; }
         private readonly IVolumeData<sbyte> _volumeData;
-        private readonly ExtractionSettings _settings;
         private readonly RegularCellCache _cache;
 
-        public TransvoxelExtractor(IVolumeData<sbyte> volumeDataData, ExtractionSettings settings)
+        public TransvoxelExtractor(IVolumeData<sbyte> volumeDataData)
         {
             _volumeData = volumeDataData;
-            _settings = settings;
             _cache = new RegularCellCache(_volumeData.Size.SideLength * 10);
             UseCache = true;
         }
 
-        public Mesh ExtractMesh(Vector3i offsetPosition)
+        public Mesh ExtractMesh(Vector3i offsetPosition, ExtractionSettings settings)
         {
             var mesh = new Mesh();
-            for (var x = 0; x < _settings.MeshLength ; x++)
+            for (var x = 0; x < settings.MeshLength ; x++)
             {
-                for (var y = 0; y < _settings.MeshLength; y ++)
+                for (var y = 0; y < settings.MeshLength; y ++)
                 {
-                    for (var z = 0; z < _settings.MeshLength; z ++)
+                    for (var z = 0; z < settings.MeshLength; z ++)
                     {
                         var position = new Vector3i(x, y, z);
-                        PolygonizeCell(offsetPosition, position, ref mesh, _settings.LevelOfDetail);
+                        PolygonizeCell(offsetPosition, position, ref mesh, settings.LevelOfDetail);
                     }
                 }
             }
